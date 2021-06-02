@@ -20,9 +20,9 @@ public class DiagnosaPenyakit extends javax.swing.JFrame {
      * Creates new form DiagnosaPenyakit
      */
     public DiagnosaPenyakit() {
-        cbl = new javax.swing.JCheckBox[gejala.length];
-        for (int i=0; i<gejala.length; i++) {
-            cbl[i] = new javax.swing.JCheckBox(gejala[i].nama);
+        cbl = new javax.swing.JCheckBox[dp.gejala.length];
+        for (int i=0; i<dp.gejala.length; i++) {
+            cbl[i] = new javax.swing.JCheckBox(dp.gejala[i].nama);
             cbl[i].addItemListener(this::cblStateChanged);
         }
         initComponents();
@@ -43,7 +43,7 @@ public class DiagnosaPenyakit extends javax.swing.JFrame {
     }
     
     private javax.swing.JCheckBox[] cbl;
-    private Gejala[] gejala = diagnosa.penyakit.DiagnosaPenyakit.gejala;
+    private diagnosa.penyakit.DiagnosaPenyakit dp = new diagnosa.penyakit.DiagnosaPenyakit();
     private List<Gejala> terpilih = new LinkedList();
     
     private javax.swing.GroupLayout.Group initCheckBoxList(javax.swing.GroupLayout.Group group) {
@@ -176,7 +176,7 @@ public class DiagnosaPenyakit extends javax.swing.JFrame {
 
     private void btnPROSESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPROSESActionPerformed
         // TODO add your handling code here:
-        List<Gejala> densitas = Gejala.hitung(terpilih);
+        List<Gejala> densitas = dp.hitung(terpilih);
         Gejala hasil = densitas.get(0);
         txtHASIL.setText(String.format("Kemungkinan terbesar menderita penyakit %s sebesar %s",
                 Arrays.toString(hasil.penyakit.toArray()),
@@ -190,8 +190,8 @@ public class DiagnosaPenyakit extends javax.swing.JFrame {
     private void cblStateChanged(java.awt.event.ItemEvent evt) {
         javax.swing.JCheckBox cb = (javax.swing.JCheckBox)evt.getItem();
         if (cb.isSelected())
-            terpilih.add(gejala[Arrays.asList(cbl).indexOf(cb)]);
-        else terpilih.remove(gejala[Arrays.asList(cbl).indexOf(cb)]);
+            terpilih.add(dp.gejala[Arrays.asList(cbl).indexOf(cb)]);
+        else terpilih.remove(dp.gejala[Arrays.asList(cbl).indexOf(cb)]);
         btnPROSES.setEnabled(terpilih.size() >= 2);
         txtHASIL.setText(null);
     }

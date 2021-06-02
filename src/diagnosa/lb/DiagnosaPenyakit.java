@@ -20,8 +20,10 @@ public class DiagnosaPenyakit extends javax.swing.JFrame {
      */
     public DiagnosaPenyakit() {
         initComponents();
-        lGEJALA.setListData(diagnosa.penyakit.DiagnosaPenyakit.gejala);
+        lGEJALA.setListData(dp.gejala);
     }
+    
+    diagnosa.penyakit.DiagnosaPenyakit dp = new diagnosa.penyakit.DiagnosaPenyakit();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,7 +143,7 @@ public class DiagnosaPenyakit extends javax.swing.JFrame {
 
     private void btnPROSESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPROSESActionPerformed
         // TODO add your handling code here:
-        List<Gejala> densitas = Gejala.hitung(lGEJALA.getSelectedValuesList());
+        List<Gejala> densitas = dp.hitung(lGEJALA.getSelectedValuesList());
         Gejala hasil = densitas.get(0);
         txtHASIL.setText(String.format("Kemungkinan terbesar menderita penyakit %s sebesar %s",
                 Arrays.toString(hasil.penyakit.toArray()),
